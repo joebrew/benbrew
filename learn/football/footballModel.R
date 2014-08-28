@@ -4,7 +4,7 @@
 library(RCurl)
 options(RCurlOptions = list(cainfo = system.file("CurlSSL", "cacert.pem", package = "RCurl")))
 
-myLink <- "https://docs.google.com/spreadsheets/d/1S77QYX6SGoUKjp912tfj9VqY_ibaBnVkI5Zi85RvbGM/export?&format=csv"
+myLink <- "https://docs.google.com/spreadsheets/d/1zWrcgoJXjs-bFT08DRGFilZmzwDHT41b51enFQDI_ac/export?&format=csv"
 myCsv <- getURL(myLink)
 fb <- read.csv(textConnection(myCsv))
 rm(myLink, myCsv)
