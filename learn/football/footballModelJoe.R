@@ -179,7 +179,7 @@ legend(x = "topright",
        border = adjustcolor(c("black", "red"), alpha.f=0.6),
        legend = c("Ben", "Joe"),
        bty = "n")
-title(main = "2014 Football season spread predictions\n(Spread = UF score minus opponent score)",
+title(main = "2014 spread predictions\n(Spread = UF score minus opponent score)",
       line = -1, cex.main =0.87)
 
 # 
