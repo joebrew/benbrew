@@ -1,0 +1,13 @@
+year,month,time,game,home_away,opp,rank,opp_rank,conf,bigcon,spread
+2014,Aug,night,1,Home,Idaho,35,119,sunbelt,FALSE,28.4133694
+2014,Sept,afternoon,2,Home,Eastern Michigan,35,125,midamerican,FALSE,23.1880179
+2014,Sept,night,3,Home,Kentucky,35,70,SEC,TRUE,9.278144
+2014,Sept,afternoon,4,Away,Alabama,35,2,SEC,TRUE,-4.5804629
+2014,Oct,afternoon,5,Away,Tennessee,35,68,SEC,TRUE,8.870538
+2014,Oct,afternoon,6,Home,LSU,35,13,SEC,TRUE,-2.3386294
+2014,Oct,afternoon,7,Home,Missouri,35,23,SEC,TRUE,-0.300599
+2014,Nov,afternoon,8,Neutral,Georgia,35,7,SEC,TRUE,-3.5614476
+2014,Nov,noon,9,Away,Vanderbilt,35,74,SEC,TRUE,10.0933562
+2014,Nov,night,10,Home,South Carolina,35,20,SEC,TRUE,-0.9120081
+2014,Nov,noon,11,Home,Eastern Kentucky,35,98,ohiovalley,FALSE,11.9655663
+2014,Nov,night,12,Away,FSU,35,1,ACC,TRUE,-9.3379949
