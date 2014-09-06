@@ -152,7 +152,16 @@ setwd("C:/Users/BrewJR/Documents/benbrew/learn/football")
 int <- read.csv("intuition.csv")
 par(mar=c(7,4,1,1))
 
-bp <- barplot(fb14$spread_ben, ylim = c(-13, 32),
+######
+# BIND INTUITION TO FB14
+######
+library(plyr)
+fb14 <- join(x = fb14, 
+          y = int,
+          by = "opp",
+          type = "left",
+          match = "first")
+bp <- barplot(fb14$spread_ben, ylim = c(-26, 32),
               names.arg = gsub(" ", "\n",fb14$opp), las = 3, cex.names = 0.65,
               col = adjustcolor("black", alpha.f=0.3),
               border = adjustcolor("black", alpha.f=0.6),
@@ -182,11 +191,30 @@ text(x = bp2[,1] +0.1,
      pos = ifelse(fb14$spread_ben > 0, 3, 1)
      )
 
-legend(x = "topright",
+points(bp[,1] - 0.1,
+       y = fb14$intuition_ben,
+       col = adjustcolor("black", alpha.f = 0.3),
+       pch = 18)
+
+points(bp2[,1] + 0.1,
+       y = fb14$intuition_joe,
+       col = adjustcolor("red", alpha.f = 0.3),
+       pch = 18)
+
+legend(x = "bottom",
        fill = adjustcolor(c("black", "red"), alpha.f=0.3),
        border = adjustcolor(c("black", "red"), alpha.f=0.6),
        legend = c("Ben", "Joe"),
-       bty = "n")
+       bty = "n",
+       title = "Model")
+
+legend(x = "bottomleft",
+       col = adjustcolor(c("black", "red"), alpha.f=0.3),
+       #border = adjustcolor(c("black", "red"), alpha.f=0.6),
+       pch = 18,
+       legend = c("Ben", "Joe"),
+       bty = "n",
+       title = "Intuition")
 title(main = "2014 spread predictions\n(Spread = UF score minus opponent score)",
       line = -1, cex.main =0.87)
 
