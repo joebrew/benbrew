@@ -137,11 +137,19 @@ library(randomForest)
 my_rf <- randomForest(spread ~ year + game + home_away + rank + opp_rank,
                       data = fb)
 
-
+######
 # MAKE PREDICTIONS
+######
 fb14$spread_joe_rf <- predict(my_rf, newdata = fb14)
 fb14$spread_joe_gam <- predict(my_gam, newdata = fb14)
 
+
+
+######
+#READ IN INTUITION STUFF
+######
+setwd("C:/Users/BrewJR/Documents/benbrew/learn/football")
+int <- read.csv("intuition.csv")
 par(mar=c(7,4,1,1))
 
 bp <- barplot(fb14$spread_ben, ylim = c(-13, 32),
