@@ -1,3 +1,6 @@
+setwd("~/Documents/benbrew/learn/football")
+
+
 #######
 # READ IN YOUR FOOTBALL SPREADSHEET FROM THE INTERNET, NAMING IT FB
 #######
@@ -148,7 +151,8 @@ fb14$spread_joe_gam <- predict(my_gam, newdata = fb14)
 ######
 #READ IN INTUITION STUFF
 ######
-setwd("C:/Users/BrewJR/Documents/benbrew/learn/football")
+setwd("~/Documents/benbrew/learn/football")
+#setwd("C:/Users/BrewJR/Documents/benbrew/learn/football")
 int <- read.csv("intuition.csv")
 par(mar=c(7,4,1,1))
 
@@ -156,11 +160,15 @@ par(mar=c(7,4,1,1))
 # BIND INTUITION TO FB14
 ######
 library(plyr)
-fb14 <- join(x = fb14, 
-          y = int,
-          by = "opp",
-          type = "left",
-          match = "first")
+fb14 <- merge(x = fb14,
+              y = int,
+              by = "opp",
+              all.x = T)
+# fb14 <- join(x = fb14, 
+#           y = int,
+#           by = "opp",
+#           type = "left",
+#           match = "first")
 bp <- barplot(fb14$spread_ben, ylim = c(-26, 32),
               names.arg = gsub(" ", "\n",fb14$opp), las = 3, cex.names = 0.65,
               col = adjustcolor("black", alpha.f=0.3),
