@@ -4,7 +4,8 @@ library(weatherData)
 # Get weather for just one day
 getWeatherForDate("GNV", "2014-04-14")
 
-start <- as.Date("2014-01-01", format = "%Y-%m-%d")
+# Get weather for a period of time
+start <- as.Date("2014-01-01", format = "%Y-%m-%d") # define jan 1 2014 as start
 x <- getSummarizedWeather("GNV", start_date = start, 
                                 end_date = Sys.Date() - 1,
                                 opt_custom_columns = TRUE,
