@@ -14,10 +14,32 @@ if ( Sys.info()["sysname"] == "Linux" ){
 setwd(public)
 
 ###
-# read in data (private, stored in private directory)
+# read in private data (private, stored in private directory)
 ###
 setwd(private)
 dat <- read.csv("obesity_flu_absences_merged.csv")
+
+###
+# read in nurse data (stored in the public directory)
+###
+setwd(public)
+nurses <- read.csv("nurses.csv")
+
+###
+# check to see if any nurses worked in more than one place
+###
+
+# the following will group nurses by each nurse and 
+# get the number of schools each has worked out
+library(dplyr)
+nurses %>% 
+  group_by(nurse) %>%
+  summarise(x = length(unique(school))) %>%
+  arrange(desc(x))
+
+###
+# clean up a bit (remove outliers, etc.)
+###
 
 ###
 # explore a bit (and consider cleaning for outliers)
@@ -46,6 +68,33 @@ x
 barplot(x, beside = T, legend = T)
 abline(h=seq(0,100,10), col = adjustcolor("black", alpha.f = 0.2),
        lty = 6)
+
+# 3d scatterplot of height, weight, and age
+library(rgl)
+library(car)
+scatter3d(dat$weight ~ dat$height + dat$age_months, 
+          fit="smooth", #linear, smooth, additive
+          ylab="Weight", xlab="Height", zlab="Age",
+          axis.col=c("darkmagenta", "black", "darkcyan"),
+          surface.col=c("blue", "green", "orange", "magenta", "cyan", "red", 
+                        "yellow", "gray"), surface.alpha=0.3,
+          neg.res.col="red", pos.res.col="darkgreen",
+          point.col = "darkblue")
+
+# 3d scatterplot of: 
+# 1. flu season absenteeism rate
+# 2. non flu season absenteeism rate
+# 3. bmi percentile for age
+
+scatter3d(dat$ab_flu_per ~ dat$ab_non_flu_per + dat$bmi_percentile_for_age, 
+          fit="smooth", #linear, smooth, additive
+          ylab="Flu season ab", xlab="Non-flu season ab", zlab="BMI p for age",
+          axis.col=c("darkmagenta", "black", "darkcyan"),
+          surface.col=c("blue", "green", "orange", "magenta", "cyan", "red", 
+                        "yellow", "gray"), surface.alpha=0.3,
+          neg.res.col="red", pos.res.col="darkgreen",
+          point.col = "darkblue")
+
 
 ###
 #
