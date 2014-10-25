@@ -2,13 +2,13 @@
 # set working directory (this is a conditional depending on whose computer is being used)
 ###
 if ( Sys.info()["sysname"] == "Linux" ){
-  public <- "/home/joebrew/Documents/fdoh/public/flu"
+  public <- "/home/joebrew/Documents/benbrew/flu"
   private <- "/media/joebrew/JB/fdoh/private/ben"
 } else if(Sys.info()["user"] == "BrewJR" ){
-  public <- "C:/Users/BrewJR/Documents/fdoh/public/flu"
+  public <- "C:/Users/BrewJR/Documents/benbrew/flu"
   private <- "E:/fdoh/private/ben"
 } else {
-  public <- "C:/Users/benbrew/Documents/fdoh/public/flu"
+  public <- "C:/Users/benbrew/Documents/benbrew/flu"
   private <- "C:/Users/benbrew/Documents/private/"
 }
 setwd(public)
