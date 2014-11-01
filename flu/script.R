@@ -248,3 +248,12 @@ summary(ben_model1)
 ben_model_odds_ratios1 <- exp(cbind(OR = coef(ben_model1), 
                                     confint(ben_model1)))
 ben_model_odds_ratios1
+
+
+############################################################################
+# Plot to see absenteeism seasonality
+##############################
+
+# create week day number variable
+
+
