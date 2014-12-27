@@ -26,17 +26,28 @@ setwd(public)
 ###
 source("functions.R")
 
-###
-# T TEST BETWEEN ABSENTEEISM AND ALL OTHER VARIABLES
-####
-#catbi
-#racebi
+
 
 ###
 # read in private data (private, stored in private directory)
 ###
 setwd(private)
 dat <- read.csv("obesity_flu_absences_merged2.csv") #2 is the version ben fixed with school grades
+
+
+
+###
+# NUMBER OF ENTRIES BY SCHOOL AND YEAR
+###
+sy <- dat %>%
+  group_by(school, year) %>%
+  summarise(n = n())
+
+###
+# T TEST BETWEEN ABSENTEEISM AND ALL OTHER VARIABLES
+####
+#catbi
+#racebi
 
 # ###
 # # Clean up school grades
