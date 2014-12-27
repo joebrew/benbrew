@@ -1,6 +1,6 @@
 library(Hmisc)
 library(dplyr)
-
+library(AER)
 
 ###
 # set working directory (this is a conditional depending on whose computer is being used)
@@ -26,15 +26,52 @@ setwd(public)
 ###
 source("functions.R")
 
-
-
 ###
 # read in private data (private, stored in private directory)
 ###
 setwd(private)
 dat <- read.csv("obesity_flu_absences_merged2.csv") #2 is the version ben fixed with school grades
 
+###
+# Simple probit model
+###
+myprobit <- glm(cbind(dat$ab_flu, dat$pres_flu) ~ 
+                  v + race + lunch_rec + year + grade, 
+                data=dat,
+                family=binomial("probit"))
 
+## model summary
+summary(myprobit)
+
+###
+# Instrumental variable regression
+###
+
+# Good article on R code similar to stata for IVR2
+# https://diffuseprior.wordpress.com/2012/05/03/an-ivreg2-function-for-r/
+
+myivr2 <- ivreg2(form = ab_flu ~ v + race + lunch_rec + year + grade,
+       endog = "z",
+       iv=c("ab_non_flu"),
+       data=na.omit(dat))
+
+
+myivr <- ivreg(cbind(dat$ab_flu, dat$pres_flu) ~ 
+                 v + race + lunch_rec + year + grade,
+            data = dat)
+myivr
+
+myivr2 <- ivreg(cbind(dat$ab_flu, dat$pres_flu) ~ v + race + lunch_rec + year + grade |
+             v + race + lunch_rec + year + grade, data = dat)
+myivr2
+
+# interpretation: Relative to the reference group (Asians)
+# being black increases your z-score by x, whereas
+# not being on free lunch reduces your z-score by x
+# http://www.ats.ucla.edu/stat/r/dae/probit.htm
+
+# confidence intervals
+confint(myprobit)
 
 ###
 # NUMBER OF ENTRIES BY SCHOOL AND YEAR
