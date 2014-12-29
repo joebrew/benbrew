@@ -33,6 +33,17 @@ setwd(private)
 dat <- read.csv("obesity_flu_absences_merged2.csv") #2 is the version ben fixed with school grades
 
 ###
+# HOW MANY STUDENTS SHOW UP MORE THAN ONCE?
+###
+students <- dat %>%
+  group_by(id) %>%
+  summarise(x11 = length(year[which(year == 2011)]),
+            x12 = length(year[which(year == 2012)]),
+            x13 = length(year[which(year == 2013)]),
+            n = n())
+table(students$n)
+
+###
 # Simple probit model
 ###
 myprobit <- glm(cbind(dat$ab_flu, dat$pres_flu) ~ 
