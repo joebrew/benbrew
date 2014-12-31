@@ -33,6 +33,22 @@ setwd(private)
 dat <- read.csv("obesity_flu_absences_merged2.csv") #2 is the version ben fixed with school grades
 
 ###
+# TRAITS BY SCHOOL
+###
+schools <- dat %>%
+  group_by(school, year) %>%
+  summarise(black = length(race[which(race == "B")]) / length(race),
+            white = length(race[which(race == "W")]) / length(race),
+            multiracial = length(race[which(race == "M")]) / length(race),
+            hispanic = length(race[which(race == "H")]) / length(race),
+            free = length(lunch_rec[which(lunch_rec == "free")]) / length(lunch_rec),
+            v = length(v[which(v == "Yes")]) / length(v),
+            ab_flu = sum(ab_flu, na.rm = T), sum(flu_days, na.rm = T),
+            ab_non_flu = sum(ab_non_flu, na.rm = T) / sum(non_flu_days, na.rm = T))
+schools <- schools[which(!is.na(schools$school)),]
+
+
+###
 # HOW MANY STUDENTS SHOW UP MORE THAN ONCE?
 ###
 students <- dat %>%
